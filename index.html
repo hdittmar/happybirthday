@@ -38,7 +38,7 @@ div.clock div {
 div.clock div p {
   margin:0;
   padding:0;
-  font-size: 80px;
+  font-size: 10em;
   position: relative;
   z-index: 100;
   color:#ff2c2c;
@@ -89,6 +89,9 @@ div.clock .meridian { margin-left: 15px; }/*END CLOCK*/
 
   <script>
     window.onload = function(){
+      if (Date.parse(new Date()) > Date.parse("2018-3-18")){
+       window.location.assign("party.html");
+      };
       time();
       setInterval(function(){
         time();
