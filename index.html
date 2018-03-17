@@ -1,1 +1,143 @@
-<h1>Happy Birthday Mama</h1>
+<style>
+
+body{
+  background-color: darkblue;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10vh;
+}
+
+@font-face {
+  font-family: 'digital-7';
+  src: url('digital-7.ttf');
+}
+
+/* CLOCK */
+
+div.clock {
+  text-align: center;
+  margin: 5px 0;
+  border:2px solid black;
+  padding: 4px 10px 0px 15px;
+  border-radius: 18px;
+  min-width:150px;
+  /*width:500px;*/
+  background-color: #333333;//#333232;
+  box-shadow: 5px 5px 10px black;
+}
+
+div.clock div {
+  display: inline-block;
+  position: relative;
+  font-family: 'digital-7';
+  src: asset-url('digital-7.ttf');
+}
+
+div.clock div p {
+  margin:0;
+  padding:0;
+  font-size: 80px;
+  position: relative;
+  z-index: 100;
+  color:#ff2c2c;
+}
+
+div.clock .placeholder {
+  color: #4C4C4C;
+  position: absolute;
+  top: 0;
+  z-index: 50;
+}
+
+div.clock .meridian { margin-left: 15px; }/*END CLOCK*/
+
+</style>
+
+<div class="clock-box">
+  <div class="countdown-digital">
+    <div class="clock">
+    <!-- MINUTE -->
+      <div class="numbers">
+        <p class="hours">00</p>
+        <p class="placeholder">88</p>
+      </div>
+
+      <div class="colon">
+        <p>:</p>
+      </div>
+
+    <!-- MINUTE -->
+      <div class="numbers">
+        <p class="minutes">00</p>
+        <p class="placeholder">88</p>
+      </div>
+
+      <div class="colon">
+        <p>:</p>
+      </div>
+
+      <!-- SECOND -->
+      <div class="numbers">
+        <p class="seconds">00</p>
+        <p class="placeholder">88</p>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    window.onload = function(){
+      time();
+      setInterval(function(){
+        time();
+      }, 1000);
+    };
+
+    function getTimeRemaining(endtime){
+      let t = endtime - Date.parse(new Date());
+      let seconds = Math.floor( (t/1000) % 60 );
+      let minutes = Math.floor( (t/1000/60) % 60 );
+      let hours = Math.floor( (t/(1000*60*60)) % 24 );
+      let days = Math.floor( t/(1000*60*60*24) );
+      return {
+        'total': t,
+        'days': days,
+        'hours': hours,
+        'minutes': minutes,
+        'seconds': seconds
+      };
+    }
+
+
+//gets current time and changes html to reflect it
+function time(){
+  let endtime = Date.parse("2018-3-18");
+    // console.log(endtime)
+
+    var date = getTimeRemaining(endtime);
+    // console.log(date.minutes)
+
+    let hours = date.hours;
+    let minutes = date.minutes;
+    let seconds = date.seconds;
+
+  //invokes function to make sure number has at least two digits
+  hours = addZero(hours);
+  minutes = addZero(minutes);
+  seconds = addZero(seconds);
+
+  //changes the html to match results
+  // if !(minutes > 0 && seconds > 0){
+    document.getElementsByClassName('hours')[0].innerHTML = hours;
+    document.getElementsByClassName('minutes')[0].innerHTML = minutes;
+    document.getElementsByClassName('seconds')[0].innerHTML = seconds;
+  // }
+}
+
+function addZero (val){
+  return (val <= 9) ? ("0" + val) : val;
+}
+
+</script>
